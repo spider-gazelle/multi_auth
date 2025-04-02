@@ -1,3 +1,6 @@
+require "../../multi_auth"
+require "oauth"
+
 class MultiAuth::Provider::Twitter < MultiAuth::Provider
   def authorize_uri(scope = nil, state = nil)
     request_token = consumer.get_request_token(redirect_uri)
@@ -65,3 +68,6 @@ class MultiAuth::Provider::Twitter < MultiAuth::Provider
     @consumer ||= OAuth::Consumer.new("api.twitter.com", key, secret)
   end
 end
+
+MultiAuth::Providers.register("twitter", MultiAuth::Provider::Twitter)
+MultiAuth::Providers.register("x", MultiAuth::Provider::Twitter)

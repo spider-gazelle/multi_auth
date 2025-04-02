@@ -1,11 +1,13 @@
-require "oauth"
-require "oauth2"
-require "./multi_auth/**"
+require "./multi_auth/*"
 
 module MultiAuth
-  @@configuration = Hash(String, Array(String)).new
+  {% begin %}
+    VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify.downcase }}
+  {% end %}
 
-  def self.make(provider, redirect_uri)
+  @@configuration = Hash(String, Tuple(String, String)).new
+
+  def self.make(provider : String, redirect_uri : String)
     MultiAuth::Engine.new(provider, redirect_uri)
   end
 
@@ -13,7 +15,7 @@ module MultiAuth
     @@configuration
   end
 
-  def self.config(provider, key, secret)
-    @@configuration[provider] = [key, secret]
+  def self.config(provider : String, key : String, secret : String)
+    @@configuration[provider] = {key, secret}
   end
 end

@@ -1,3 +1,6 @@
+require "../../multi_auth"
+require "oauth2"
+
 class MultiAuth::Provider::Facebook < MultiAuth::Provider
   def authorize_uri(scope = nil, state = nil)
     scope ||= "email"
@@ -80,3 +83,5 @@ class MultiAuth::Provider::Facebook < MultiAuth::Provider
     )
   end
 end
+
+MultiAuth::Providers.register("facebook", MultiAuth::Provider::Facebook)

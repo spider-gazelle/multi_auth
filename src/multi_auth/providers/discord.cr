@@ -1,3 +1,6 @@
+require "../../multi_auth"
+require "oauth2"
+
 class MultiAuth::Provider::Discord < MultiAuth::Provider
   def authorize_uri(scope = nil, state = nil)
     defaults = [
@@ -88,3 +91,5 @@ class MultiAuth::Provider::Discord < MultiAuth::Provider
     user
   end
 end
+
+MultiAuth::Providers.register("discord", MultiAuth::Provider::Discord)

@@ -1,6 +1,7 @@
 require "spec"
 require "webmock"
 require "../src/multi_auth"
+require "../src/multi_auth/providers/*"
 
 MultiAuth.config("google", "google_id", "google_secret")
 MultiAuth.config("github", "github_id", "github_secret")
